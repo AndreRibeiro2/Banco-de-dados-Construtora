@@ -1,0 +1,71 @@
+varchar suporta apenas idiomas orientais
+
+nvarchar (Onicode) suporta todos os idiomas
+
+PK: Primary key (Chave primaria)
+
+FK: Foreign key (Chave-Estrangeira) 
+
+UQ: Unique - obrigatório e não pode ter repetição (Unico/Chave-candidata) Ex: Validação de cpf (Impedir duplicidade no banco de dados)
+
+CK: Check (Restrição custumizavel)
+
+DEFAULT: Valor padrão do atributo (preenchimento automatico) Ex: Posso colocar como 1 todo cliente novo cadastrado, então a cada cadastro o cliente tera 1 como valor padrão
+
+
+	Nulabilidade é a possibilidade do atributo ser nulo ou não posso ter atributos:
+
+
+Anulável: Pode ser nulo (Opcional-Null)
+Não-anulável: Não pode ser nulo é obrigatório (Not-Null)
+
+Restrição PK
+
+CREAT TABLE FUNCIONARIO (
+
+	CODIGO INT NOT NULL,
+	NOME VARCHAR (50) NOT NULL,
+	EMAIL VARCHAR (50) NOT NULL,
+	CONSTRAINT PK_FUNCIONARIO PRIMARY KEY (CODIGO)
+);
+
+PK_NomeDaTabela ela vai ser sempre Nome da constraint primary key associada ao atributo (): CONSTRAINT PRIMARY KEY e vai estar associada a (CODIGO)
+
+VARCHAR o que estiver dentro do parenteses será a quantidade de informações que será guardado.
+
+CREATE TABLE DEPENDENTE (
+
+	CODIGO INT NOT NULL,
+	NOME VARCHAR(50) NOT NULL,
+	COD_FUNCIONARIO INT NOT NULL,
+	CONSTRAINT FK_DEPENDENTE_FUNCIONARIO FOREIGN KEY (COD_FUNCIONARIO) REFERENCES FUNCIONARIO (CODIGO)
+);
+
+Restrições sempre no final de cada tabela
+
+Toda tabela só pode ter uma chave primaria, Unique sera sempre UQ_CaminhoDaTabela
+
+Restrição do tipo CK:
+
+CREATE TABLE FUNCIONARIO (
+
+	CODIGO INT NOT NULL,
+	NOME VARCHAR(50) NOT NULL,
+	SEXO CHAR(1) NOT NULL,
+	CONSTRAINT PK_FUNCIONARIO PRIMARY KEY (CODIGO),
+	CONSTRAINT CK_FUNCIONARIO_SEXO cHECK(SEXO IN('F,'M'))
+
+);
+
+Restrição do tipo DEFAULT:
+
+CREATE TABLE FUNCIONARIO (
+	
+	CODIGO INT NOT NULL,
+	NOME VARCHAR (50) NOT NULL,
+	DATA_HORA_CADASTRO ,
+	ATIVO BIT NOT NULL DEFAULT 1, (Bit suporta só 0 ou 1, nesse caso Default seria 1 porque está ativo e 0 inativo na empresa)
+	CONSTRAINT PK_FUNCIONARIO PRIMARY KEY (CODIGO)
+);
+
+GETDATE (Retorna data e hora atual do sistema)
